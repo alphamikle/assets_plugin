@@ -1,8 +1,8 @@
 name: assets_annotations
 description: Package of annotations for generate code for assets
 version: 1.0.0
-author:
-homepage:
+author: Mikhail Alpha <alphamikle@gmail.com>
+homepage: https://github.com/alphamikle/assets_plugin/tree/master/assets_annotations
 
 environment:
   sdk: ">=2.5.0"

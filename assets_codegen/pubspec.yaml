@@ -2,7 +2,7 @@ name: assets_codegen
 description: Code generator for assets plugin
 version: 1.0.0
 author: Mikhail Alpha <alphamikle@gmail.com>
-homepage: https://github.com/alphamikle/assets_codegen
+homepage: https://github.com/alphamikle/assets_plugin/tree/master/assets_codegen
 
 environment:
   sdk: ">=2.5.0"
@@ -14,9 +14,7 @@ dependencies:
   source_gen: ^0.9.4+7
   yaml: ^2.2.0
   path: ^1.6.4
-  assets_annotations:
-    path: ../assets_annotations/
-
+  assets_annotations: ^1.0.0
 
 dev_dependencies:
   flutter_test:
