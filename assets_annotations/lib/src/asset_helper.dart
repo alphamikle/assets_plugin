@@ -1,0 +1,3 @@
+class AstHelp {
+  const AstHelp();
+}

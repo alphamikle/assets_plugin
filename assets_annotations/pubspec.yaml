@@ -1,0 +1,16 @@
+name: assets_annotations
+description: Package of annotations for generate code for assets
+version: 1.0.0
+author:
+homepage:
+
+environment:
+  sdk: ">=2.5.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter

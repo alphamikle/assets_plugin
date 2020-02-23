@@ -1,0 +1,24 @@
+targets:
+  $default:
+    builders:
+      assets_codegen:
+        enabled: true
+
+builders:
+  assets_codegen:
+    target: ':assets_generator'
+    import: 'package:assets_codegen/builder.dart'
+    builder_factories:
+      - assetsCodeGen
+    build_extensions:
+      .dart:
+        - .g.dart
+    auto_apply: dependents
+    build_to: cache
+    defaults:
+      options:
+        default_preload:
+          - txt
+          - json
+    applies_builders:
+      - source_gen|combining_builder
