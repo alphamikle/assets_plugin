@@ -1,1 +1,1 @@
-[Documentation of package at](./assets_codegen/README.md)
+./assets_codegen/README.md
