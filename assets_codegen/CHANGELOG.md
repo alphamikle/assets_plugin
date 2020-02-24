@@ -1,1 +1,3 @@
+## 1.0.2 - Add example symlink
+## 1.0.1 - Add more info to readme and code docs
 ## 1.0.0 - Initial release

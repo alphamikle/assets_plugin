@@ -1,6 +1,11 @@
-# assets_codegen
+# assets_plugin
 
 #### Code generator for assets plugin
+
+This plugin consist of three packages:
+- [assets_annotations](https://github.com/alphamikle/assets_plugin/tree/master/assets_annotations) - [pub.dev](https://pub.dev/packages/assets_annotations)
+- [assets_codegen](https://github.com/alphamikle/assets_plugin/tree/master/assets_codegen) - [pub.dev](https://pub.dev/packages/assets_codegen)
+- [assets_example](https://github.com/alphamikle/assets_plugin/tree/master/assets_example)
 
 ## Getting Started
 

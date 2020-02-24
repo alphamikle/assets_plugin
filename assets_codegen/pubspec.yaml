@@ -1,14 +1,12 @@
 name: assets_codegen
-description: Code generator for assets plugin
-version: 1.0.0
+description: Code generator for assets plugin. Using this with assets_annotation package and @AstHelp annotation. More info at README.md
+version: 1.0.2
 homepage: https://github.com/alphamikle/assets_plugin/tree/master/assets_codegen
 
 environment:
   sdk: ">=2.5.0 < 3.0.0"
 
 dependencies:
-  flutter:
-    sdk: flutter
   build: ^1.2.2
   source_gen: ^0.9.4+7
   yaml: ^2.2.0
@@ -18,7 +16,6 @@ dependencies:
   assets_annotations: ^1.0.0
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
   build_test: ^0.10.12+1
   build_runner: ^1.7.4
+  test: ^1.9.4

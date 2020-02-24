@@ -14,6 +14,7 @@ const FLUTTER = 'flutter';
 const ASSET_ENUM = 'Asset';
 const ASSET_ENUM_MAP = '_assetEnumMap';
 
+/// Generator for user classes, annotated with @AstHelp
 class AssetsGenerator extends GeneratorForAnnotation<AstHelp> {
   Directory curDir;
   String path;
@@ -53,7 +54,10 @@ class AssetsGenerator extends GeneratorForAnnotation<AstHelp> {
     curDir = Directory.current;
     path = curDir.path;
     files = curDir.listSync();
-    pubspecEntity = files.firstWhere((FileSystemEntity fileEntity) => fileEntity.path.contains(RegExp(r'pubspec.ya?ml$')), orElse: () => exception('pubspec file'));
+    pubspecEntity = files.firstWhere(
+        (FileSystemEntity fileEntity) =>
+            fileEntity.path.contains(RegExp(r'pubspec.ya?ml$')),
+        orElse: () => exception('pubspec file'));
     pubspecFile = File(pubspecEntity.path);
     pubspecContent = loadYaml(pubspecFile.readAsStringSync());
     flutter = pubspecContent[FLUTTER];
@@ -63,6 +67,7 @@ class AssetsGenerator extends GeneratorForAnnotation<AstHelp> {
     assetsFolders = flutter[ASSETS];
   }
 
+  /// Return generated file header
   String getHead(String generatedFileName) {
     return '''
       // GENERATED CODE - DO NOT MODIFY BY HAND
@@ -76,19 +81,29 @@ class AssetsGenerator extends GeneratorForAnnotation<AstHelp> {
     ''';
   }
 
+  /// Watcher for assets directories changes
   void directoryWatcher() {
     final DartFormatter formatter = DartFormatter();
-    String manualGeneratedFileName = replaceAssetFolder(prevStep.inputId.path).replaceAll(RegExp(r'\.dart$'), '');
-    String manualGeneratedFilePath = p.join(Directory.current.path, prevStep.inputId.path.replaceFirst('$manualGeneratedFileName.dart', '$manualGeneratedFileName.g.dart'));
-    String manualGeneratedCode = formatter.format(getHead(manualGeneratedFileName) + generateForAnnotatedElement(prevElement, prevAnnotation, prevStep));
+    String manualGeneratedFileName = replaceAssetFolder(prevStep.inputId.path)
+        .replaceAll(RegExp(r'\.dart$'), '');
+    String manualGeneratedFilePath = p.join(
+        Directory.current.path,
+        prevStep.inputId.path.replaceFirst('$manualGeneratedFileName.dart',
+            '$manualGeneratedFileName.g.dart'));
+    String manualGeneratedCode = formatter.format(
+        getHead(manualGeneratedFileName) +
+            generateForAnnotatedElement(prevElement, prevAnnotation, prevStep));
     final File generatedFile = File(manualGeneratedFilePath);
     generatedFile.writeAsString(manualGeneratedCode);
   }
 
+  /// Add watcher function for folders watchers
   void assignWatchers() {
     assetsFoldersWatchers.forEach((String key, Stream<FileSystemEvent> value) {
       value.listen((FileSystemEvent event) {
-        if ((event is FileSystemCreateEvent || event is FileSystemDeleteEvent) && !event.path.contains('___jb_tmp___')) {
+        if ((event is FileSystemCreateEvent ||
+                event is FileSystemDeleteEvent) &&
+            !event.path.contains('___jb_tmp___')) {
           directoryWatcher();
         }
       });
@@ -96,6 +111,7 @@ class AssetsGenerator extends GeneratorForAnnotation<AstHelp> {
     isWatchersAssigned = true;
   }
 
+  /// Returns assets mixin start
   String startMixin(String title) {
     return 'mixin _\$$title {\n';
   }
@@ -118,10 +134,15 @@ class AssetsGenerator extends GeneratorForAnnotation<AstHelp> {
   }
 
   String replaceUnderscore(String assetField) {
-    assetField = assetField.replaceAllMapped(RegExp(r'_([a-zA-Z0-9])'), (Match match) => match.group(1).toUpperCase()).replaceAll('_', '');
-    return assetField.replaceAllMapped(RegExp(r'^([A-Z])'), (Match match) => match.group(1).toLowerCase());
+    assetField = assetField
+        .replaceAllMapped(RegExp(r'_([a-zA-Z0-9])'),
+            (Match match) => match.group(1).toUpperCase())
+        .replaceAll('_', '');
+    return assetField.replaceAllMapped(
+        RegExp(r'^([A-Z])'), (Match match) => match.group(1).toLowerCase());
   }
 
+  /// Replace invalid dart variable names for correct with prefix asset...
   String checkForInvalidFieldName(String assetField) {
     if (!assetField.contains(RegExp(r'^[a-z_$]'))) {
       assetField = 'asset$assetField';
@@ -129,14 +150,17 @@ class AssetsGenerator extends GeneratorForAnnotation<AstHelp> {
     return assetField;
   }
 
+  /// Check for same file name in several files in different dirs
   String checkForCopy(String assetField, String assetFileName) {
-    if (assetsFields.contains(assetField) && !assetsFiles.contains(assetFileName)) {
+    if (assetsFields.contains(assetField) &&
+        !assetsFiles.contains(assetFileName)) {
       assetField += 'Copy';
       return checkForCopy(assetField, assetFileName);
     }
     return assetField;
   }
 
+  /// Add an asset mixin field with an asset full path and short name
   String addAssetClassField(String assetFileName) {
     String assetField = replaceAssetFolder(assetFileName);
     assetField = replaceSlash(assetField);
@@ -155,7 +179,8 @@ class AssetsGenerator extends GeneratorForAnnotation<AstHelp> {
   }
 
   String addToEnum(String assetField) {
-    final String fieldName = RegExp(r'^final ([a-zA-Z0-9]+) =').firstMatch(assetField).group(1);
+    final String fieldName =
+        RegExp(r'^final ([a-zA-Z0-9]+) =').firstMatch(assetField).group(1);
     return '$fieldName,\n';
   }
 
@@ -168,7 +193,8 @@ class AssetsGenerator extends GeneratorForAnnotation<AstHelp> {
   }
 
   String addToEnumMap(String enumField, String assetFileName) {
-    final String fieldName = RegExp(r'^([a-zA-Z0-9]+)').firstMatch(enumField).group(1);
+    final String fieldName =
+        RegExp(r'^([a-zA-Z0-9]+)').firstMatch(enumField).group(1);
     return '$ASSET_ENUM.$fieldName: \'$assetFileName\',\n';
   }
 
@@ -176,6 +202,7 @@ class AssetsGenerator extends GeneratorForAnnotation<AstHelp> {
     return '$enumMap\n};\n\n';
   }
 
+  /// Generate preload assets function
   String preloadAssets() {
     return '''
     final Map<$ASSET_ENUM, String> _preloadedAssets = Map();
@@ -206,7 +233,8 @@ class AssetsGenerator extends GeneratorForAnnotation<AstHelp> {
   }
 
   @override
-  FutureOr<String> generateForAnnotatedElement(el.Element element, ConstantReader annotation, BuildStep step) {
+  FutureOr<String> generateForAnnotatedElement(
+      el.Element element, ConstantReader annotation, BuildStep step) {
     String mixin = startMixin(element.name);
     final Set<String> tempAssetsFiles = {};
     for (String assetFolder in assetsFolders) {
@@ -215,14 +243,20 @@ class AssetsGenerator extends GeneratorForAnnotation<AstHelp> {
       if (!assetsFoldersWatchers.containsKey(dirPath)) {
         assetsFoldersWatchers[dirPath] = assetDirectory.watch(recursive: true);
       }
-      final List<FileSystemEntity> folderFiles = assetDirectory.listSync(recursive: true).where((FileSystemEntity fileEntity) => FileSystemEntity.isFileSync(fileEntity.path)).toList();
-      tempAssetsFiles.addAll(folderFiles.map((FileSystemEntity fileEntity) => fileEntity.path.replaceFirst(RegExp('$path/'), '')));
+      final List<FileSystemEntity> folderFiles = assetDirectory
+          .listSync(recursive: true)
+          .where((FileSystemEntity fileEntity) =>
+              FileSystemEntity.isFileSync(fileEntity.path))
+          .toList();
+      tempAssetsFiles.addAll(folderFiles.map((FileSystemEntity fileEntity) =>
+          fileEntity.path.replaceFirst(RegExp('$path/'), '')));
     }
     String assetEnum = startEnum();
     String enumMap = startEnumMap();
     for (String assetFile in tempAssetsFiles) {
       final String fieldName = addAssetClassField(assetFile);
-      if (preloadMimes.any((String mime) => assetFile.contains(RegExp('\.$mime\$')))) {
+      if (preloadMimes
+          .any((String mime) => assetFile.contains(RegExp('\.$mime\$')))) {
         final String enumField = addToEnum(fieldName);
         assetEnum += enumField;
         enumMap += addToEnumMap(enumField, assetFile);
