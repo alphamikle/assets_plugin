@@ -1,6 +1,6 @@
 name: assets_annotations
 description: Package of annotations for generate code for assets with @AstHelp annotation at now. You should mark your assetHelperClass with this to generate the code
-version: 1.0.1
+version: 1.0.2
 homepage: https://github.com/alphamikle/assets_plugin/tree/master/assets_annotations
 
 environment:
