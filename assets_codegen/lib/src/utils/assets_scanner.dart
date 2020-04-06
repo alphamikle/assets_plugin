@@ -16,6 +16,7 @@ class AssetsScanner {
   YamlList _assetsFolders;
 
   String get path => _path;
+
   YamlList get assetsFolders => _assetsFolders;
 
   AssetsScanner() {

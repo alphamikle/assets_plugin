@@ -14,7 +14,6 @@ import 'package:source_gen/source_gen.dart';
 import 'package:yaml/yaml.dart';
 
 class IntlGenerator extends GeneratorForAnnotation<IntlHelp> with DirectoryWatcher<IntlHelp> {
-  final BuilderOptions _options;
   final Set<String> _intlFiles = {};
   final Set<String> _assetsFiles = {};
   IntlTemplate _intlTemplate;
@@ -22,7 +21,7 @@ class IntlGenerator extends GeneratorForAnnotation<IntlHelp> with DirectoryWatch
 
   String _intlFilesPrefix;
 
-  IntlGenerator(this._options) {
+  IntlGenerator() {
     scanAssets();
   }
 
