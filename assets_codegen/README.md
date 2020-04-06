@@ -271,6 +271,6 @@ class Messages {
       Localizations.of(context, LocalizationMessages);
 }
 ```
-![zero cows](example/assets/img/zero%20cows.png)
-![one cow](example/assets/img/one%20cow.png)
-![two cows](example/assets/img/two%20cows.png)
+![zero cows](https://github.com/alphamikle/assets_plugin/blob/master/assets_example/assets/img/one%20cow.png)
+![one cow](https://github.com/alphamikle/assets_plugin/blob/master/assets_example/assets/img/two%20cows.png)
+![two cows](https://github.com/alphamikle/assets_plugin/blob/master/assets_example/assets/img/zero%20cows.png)
