@@ -83,7 +83,7 @@ class IntlGenerator extends GeneratorForAnnotation<IntlHelp> with DirectoryWatch
     _intlFilesPrefix = annotation.read('prefix').stringValue;
     _fillIntlFiles();
     _readIntlFiles();
-//    tryToAssignWatchers(element, annotation, buildStep);
+    tryToAssignWatchers(element, annotation, buildStep);
     return _intlTemplate.template;
   }
 }
