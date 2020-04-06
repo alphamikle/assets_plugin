@@ -22,3 +22,16 @@ builders:
           - json
     applies_builders:
       - source_gen|combining_builder
+
+  intl_codegen:
+    target: ':intl_generator'
+    import: 'package:assets_codegen/builder.dart'
+    builder_factories:
+      - intlCodeGen
+    build_extensions:
+      .dart:
+        - .g.dart
+    auto_apply: dependents
+    build_to: cache
+    applies_builders:
+      - source_gen|combining_builder

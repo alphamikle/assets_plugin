@@ -3,7 +3,7 @@
 part of 'asset_helper.dart';
 
 // **************************************************************************
-// AssetsGenerator
+// Generator of asset_helper
 // **************************************************************************
 
 enum Asset {
@@ -18,12 +18,17 @@ final Map<Asset, String> _assetEnumMap = {
   Asset.secondCopy: 'assets/text/second.txt',
 };
 
-mixin _$TextHelper {
+mixin _$AssetHelper {
   final second = 'assets/second.json';
   final rigDemo = 'assets/rive/Rig Demo.flr2d';
+  final oneCow = 'assets/img/one cow.png';
+  final twoCows = 'assets/img/two cows.png';
+  final zeroCows = 'assets/img/zero cows.png';
   final third = 'assets/img/third.png';
   final first = 'assets/text/first.txt';
   final secondCopy = 'assets/text/second.txt';
+  final intl = 'assets/localization/ru/intl.yaml';
+  final intlCopy = 'assets/localization/en/intl.yaml';
   final Map<Asset, String> _preloadedAssets = Map();
   bool isPreloaded = false;
   Future<bool> preloadAssets() async {

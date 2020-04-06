@@ -1,6 +1,6 @@
 name: assets_annotations
-description: Package of annotations for generate code for assets with @AstHelp annotation at now. You should mark your assetHelperClass with this to generate the code
-version: 1.0.2
+description: Package of annotations for generate code for assets with @AstHelp annotation for generate const classes with your assets paths and preload their content and @IntlHelp annotation for generate LocalizationDelegate class
+version: 1.1.0
 homepage: https://github.com/alphamikle/assets_plugin/tree/master/assets_annotations
 
 environment:

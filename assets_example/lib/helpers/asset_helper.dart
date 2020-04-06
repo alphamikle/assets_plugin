@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 part 'asset_helper.g.dart';
 
 @AstHelp()
-class AssetHelper with _$TextHelper {}
+class AssetHelper with _$AssetHelper {}
 
 final AssetHelper helper = AssetHelper();
 
