@@ -3,7 +3,7 @@
 part of 'localization_delegate.dart';
 
 // **************************************************************************
-// IntlGenerator
+// Generator of localization_delegate
 // **************************************************************************
 
 abstract class LocalizationMessages {
@@ -28,6 +28,8 @@ abstract class LocalizationMessages {
 
   /// Используется для описания количества коров
   String cow(int howMany) => '';
+
+  final String new_message = '';
 }
 
 class _Ru extends LocalizationMessages {
@@ -83,6 +85,10 @@ class _Ru extends LocalizationMessages {
       one: '$howMany корова',
       other: '$howMany коровы',
       desc: 'Используется для описания количества коров');
+
+  @override
+  final String new_message =
+      Intl.message('Новое сообщение', name: 'new_message');
 }
 
 class _En extends LocalizationMessages {
@@ -138,6 +144,9 @@ class _En extends LocalizationMessages {
       one: '$howMany cow',
       other: '$howMany cows',
       desc: 'Используется для описания количества коров');
+
+  @override
+  final String new_message = Intl.message('New message', name: 'new_message');
 }
 
 class _$LocalizationDelegate

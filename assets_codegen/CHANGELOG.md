@@ -1,3 +1,4 @@
+## 1.1.3 - Fix future wait generic type and empty enum
 ## 1.1.2 - Uncomment files watcher
 ## 1.1.1 - Fix pub.dev issues
 ## 1.1.0 - Add generator for @IntlHelp for generating localizations

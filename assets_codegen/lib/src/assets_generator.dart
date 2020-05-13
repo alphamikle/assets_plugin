@@ -87,7 +87,9 @@ class AssetsGenerator extends GeneratorForAnnotation<AstHelp> with DirectoryWatc
   }
 
   String _startEnum() {
-    return 'enum $ASSET_ENUM {\n';
+    return '''enum $ASSET_ENUM {
+      _stub,
+    ''';
   }
 
   String _addToEnum(String assetField) {
@@ -126,7 +128,7 @@ class AssetsGenerator extends GeneratorForAnnotation<AstHelp> with DirectoryWatc
       for ($ASSET_ENUM assetEnumField in $ASSET_ENUM.values) {
         loaders.add(loadAsset(assetEnumField));
       }
-      await Future.wait(loaders);
+      await Future.wait<void>(loaders);
       isPreloaded = true;
       return isPreloaded;
     }

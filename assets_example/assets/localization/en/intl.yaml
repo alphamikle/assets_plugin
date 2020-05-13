@@ -34,3 +34,4 @@ cow:
   one: cow
   other: cows
   desc: Используется для описания количества коров
+new_message: New message
