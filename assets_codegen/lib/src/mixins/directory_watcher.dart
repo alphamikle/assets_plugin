@@ -51,9 +51,8 @@ mixin DirectoryWatcher<T> on GeneratorForAnnotation<T> {
       if (!_assetsFoldersWatchers.containsKey(dirPath)) {
         _assetsFoldersWatchers[dirPath] = assetDirectory.watch(recursive: true);
       }
-      final List<FileSystemEntity> folderFiles =
-          assetDirectory.listSync(recursive: true).where((FileSystemEntity fileEntity) => FileSystemEntity.isFileSync(fileEntity.path)).toList();
-      tempAssetsFiles.addAll(folderFiles.map((FileSystemEntity fileEntity) => fileEntity.path.replaceFirst(RegExp('$path/'), '')));
+      final List<FileSystemEntity> folderFiles = assetDirectory.listSync(recursive: true).where((FileSystemEntity fileEntity) => FileSystemEntity.isFileSync(fileEntity.path)).toList();
+      tempAssetsFiles.addAll(folderFiles.map((FileSystemEntity fileEntity) => fileEntity.path.replaceFirst(RegExp('$path/'), '')).where((String fileName) => !fileName.contains('/.')));
     }
     return tempAssetsFiles;
   }
@@ -62,10 +61,8 @@ mixin DirectoryWatcher<T> on GeneratorForAnnotation<T> {
   void _directoryWatcher() {
     final DartFormatter formatter = DartFormatter();
     String manualGeneratedFileName = getOnlyAssetFileName(prevStep.inputId.path).replaceAll(RegExp(r'\.dart$'), '');
-    String manualGeneratedFilePath =
-        p.join(Directory.current.path, prevStep.inputId.path.replaceFirst('$manualGeneratedFileName.dart', '$manualGeneratedFileName.g.dart'));
-    String manualGeneratedCode =
-        formatter.format(getHead(manualGeneratedFileName) + generateForAnnotatedElement(prevElement, prevAnnotation, prevStep));
+    String manualGeneratedFilePath = p.join(Directory.current.path, prevStep.inputId.path.replaceFirst('$manualGeneratedFileName.dart', '$manualGeneratedFileName.g.dart'));
+    String manualGeneratedCode = formatter.format(getHead(manualGeneratedFileName) + generateForAnnotatedElement(prevElement, prevAnnotation, prevStep));
     final File generatedFile = File(manualGeneratedFilePath);
     generatedFile.writeAsStringSync(manualGeneratedCode);
   }
