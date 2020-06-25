@@ -91,7 +91,7 @@ class LanguageTemplate {
       if (message.contains(pattern)) {
         return message.replaceAll(pattern, '\$$HOW_MANY');
       }
-      return '\$$HOW_MANY $message';
+      return '$message';
     }
 
     final String _desc = desc != null && desc.isNotEmpty ? '/// $desc' : '';
@@ -127,19 +127,13 @@ class LanguageTemplate {
     switch (value.length) {
       case ALL_WITH_DESC:
         {
-          _addPluralMessage(code,
-              zero: value[ZERO_NUM_ALL],
-              one: value[ONE_NUM_ALL],
-              two: value[TWO_NUM_ALL],
-              other: value[OTHER_NUM_ALL],
-              desc: value[DESC_NUM_ALL] ?? '');
+          _addPluralMessage(code, zero: value[ZERO_NUM_ALL], one: value[ONE_NUM_ALL], two: value[TWO_NUM_ALL], other: value[OTHER_NUM_ALL], desc: value[DESC_NUM_ALL] ?? '');
           return;
         }
       case ALL_WITHOUT_DESC_OR_WITHOUT_TWO_WITH_DESC:
         {
           if (_isLastItemIsOther([value[ZERO_NUM_NOT_ALL], value[ONE_NUM_NOT_ALL], value[OTHER_NUM_NOT_ALL]], value[DESC_NUM_NOT_ALL])) {
-            _addPluralMessage(code,
-                zero: value[ZERO_NUM_NOT_ALL], one: value[ONE_NUM_NOT_ALL], other: value[OTHER_NUM_NOT_ALL], desc: value[DESC_NUM_NOT_ALL] ?? '');
+            _addPluralMessage(code, zero: value[ZERO_NUM_NOT_ALL], one: value[ONE_NUM_NOT_ALL], other: value[OTHER_NUM_NOT_ALL], desc: value[DESC_NUM_NOT_ALL] ?? '');
             return;
           }
           _addPluralMessage(code, zero: value[ZERO_NUM_ALL], one: value[ONE_NUM_ALL], two: value[TWO_NUM_ALL], other: value[OTHER_NUM_ALL]);
