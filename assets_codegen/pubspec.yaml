@@ -4,7 +4,7 @@ version: 1.2.0
 homepage: https://github.com/alphamikle/assets_plugin/tree/master/assets_codegen
 
 environment:
-  sdk: ">=2.5.0"
+  sdk: ">=2.5.0 < 3.0.0"
 
 dependencies:
   flutter:
