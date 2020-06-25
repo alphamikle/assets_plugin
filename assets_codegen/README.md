@@ -56,27 +56,6 @@ For example this two files will produce Delegate:
 ru:
 ```yaml
 ok: OK # value
-wife:
-  - Жён # zero
-  - Жена # one
-  - Жены # two
-#  - Жёны # other
-  - Описание поля "Жена" # desc
-wife_collision:
-  - Жён # zero
-  - Жена # one
-  - Жены # two
-  - Жёны # other
-#  - Описание поля "Жена" # desc
-husband:
-  - мужей # zero
-  - муж # one
-  - мужа
-  - мужа # other
-  - Описание поля "Муж" # desc
-send:
-  - Отправить # value
-  - Отправить что-то куда-то # desc
 save:
   value: Сохранить
   desc: Сохранение чего-либо где-либо
@@ -84,7 +63,9 @@ child:
   zero: Детей
   one: Ребенок
   two: Ребенка
-  other: Дети
+  few: Детей
+  many: Детей
+  other: Детей
   desc: Используется для описания количества детей
 cow:
   zero: коров
@@ -95,27 +76,6 @@ cow:
 en:
 ```yaml
 ok: OK # value
-wife:
-  - wives # zero
-  - wife # one
-  - wives # two
-#  - wives # other
-  - Описание поля "Жена" # desc
-wife_collision:
-  - wives # zero
-  - wife # one
-  - wives # two
-  - wives # other
-#  - Описание поля "Жена" # desc
-husband:
-  - husbands # zero
-  - husband # one
-  - husbands # two
-  - husbands # other
-  - Описание поля "Муж" # desc
-send:
-  - Send #value
-  - Отправить что-то куда-то #desc
 save:
   value: Save
   desc: Сохранение чего-либо где-либо
@@ -150,44 +110,6 @@ key:
   two: yourMessage for 2 <- It's an optional field for that type
   other: yourMessage for other
   desc: yourMessageDescription <- It's an optional field for that type
-```
-with desc in array format:
-```yaml
-key:
-  - yourMessage
-  - yourMessageDescription <- It's an optional field for that type
-```
-with pluralization in array format:
-```yaml
-key:
-  - yourMessage for 0
-  - yourMessage for 1
-  - yourMessage for 2 <- It's an optional field for that type
-  - yourMessage for other
-  - yourMessageDescription <- It's an optional field for that type
-```
-example with missing "two" key and with desc:
-```yaml
-key:
-  - yourMessage for 0
-  - yourMessage for 1
-  - yourMessage for other
-  - yourMessageDescription <- It's an optional field for that type
-```
-example with missing "desc" key and with two:
-```yaml
-key:
-  - yourMessage for 0
-  - yourMessage for 1
-  - yourMessage for 2 <- It's an optional field for that type
-  - yourMessage for other
-```
-example with missing "two" key and missing "desc"
-```yaml
-key:
-  - yourMessage for 0
-  - yourMessage for 1
-  - yourMessage for other
 ```
 Plugin can understand difference between your description and other fields by it's content and choose correct type
 

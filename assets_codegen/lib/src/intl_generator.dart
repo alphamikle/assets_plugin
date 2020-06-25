@@ -68,12 +68,10 @@ class IntlGenerator extends GeneratorForAnnotation<IntlHelp> with DirectoryWatch
     final dynamic value = entry.value;
     if (value is String) {
       template.addSimpleMessage(key, value);
-    }
-    if (value is YamlMap) {
+    } else if (value is YamlMap) {
       template.addMapMessage(key, value);
-    }
-    if (value is YamlList) {
-      template.addListMessage(key, value);
+    } else {
+      throw Exception('Invalid format of message');
     }
   }
 

@@ -1,3 +1,4 @@
+## 2.0.0 - Remove list format of plurals and add few with more plural forms
 ## 1.2.0 - Pluralized string will print only word, without a number, by default
 ## 1.1.4 - Fix errors on handling hidden files
 ## 1.1.3 - Fix future wait generic type and empty enum
