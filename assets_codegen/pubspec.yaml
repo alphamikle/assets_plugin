@@ -1,6 +1,6 @@
 name: assets_codegen
 description: Code generator for assets plugin. Using this with assets_annotation package and one of @AstHelp, @IntlHelp annotations. More info at README.md
-version: 2.0.0
+version: 2.0.1
 homepage: https://github.com/alphamikle/assets_plugin/tree/master/assets_codegen
 
 environment:
@@ -15,7 +15,6 @@ dependencies:
   path: ^1.7.0
   analyzer: ^0.39.10
   dart_style: ^1.3.6
-  edit_distance: ^0.4.1
   assets_annotations: ^1.1.1
 
 dev_dependencies:

@@ -1,9 +1,8 @@
 import 'package:assets_codegen/src/constants/common_constants.dart';
 import 'package:assets_codegen/src/constants/language_template_constants.dart';
-import 'package:edit_distance/edit_distance.dart' show Levenshtein;
 import 'package:yaml/yaml.dart';
 
-void _nullException(String value, [String name = 'code']) {
+void _nullException(String value, [String name = CODE]) {
   if (value == null) {
     throw ArgumentError.notNull(name);
   }
@@ -13,30 +12,6 @@ void _emptyException(String value, [String name = CODE]) {
   if (value.isEmpty) {
     throw ArgumentError.value(value, name, '$name must not been empty');
   }
-}
-
-bool _isLastItemIsOther(List<String> zeroOneTwoOrOther, String otherOrDesc) {
-  final Levenshtein comparator = Levenshtein();
-  otherOrDesc = otherOrDesc.toLowerCase();
-  double maxDiff = 0;
-  double otherDiff = double.infinity;
-  final int otherCounter = zeroOneTwoOrOther.length;
-  for (int i = 0; i < otherCounter; i++) {
-    final String value = zeroOneTwoOrOther[i].toLowerCase();
-    for (int k = i + 1; k < otherCounter; k++) {
-      final String otherValue = zeroOneTwoOrOther[k].toLowerCase();
-      final double similarity = comparator.distance(value, otherValue).toDouble();
-      if (similarity > maxDiff) {
-        maxDiff = similarity;
-      }
-    }
-    final double similarity = comparator.distance(value, otherOrDesc).toDouble();
-    if (similarity < otherDiff) {
-      otherDiff = similarity;
-    }
-  }
-  print('$maxDiff, $otherDiff, $zeroOneTwoOrOther, $otherOrDesc');
-  return !(maxDiff >= otherDiff);
 }
 
 class LanguageTemplate {
