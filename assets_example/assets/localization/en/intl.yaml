@@ -1,37 +1,36 @@
-ok: OK # value
-wife:
-  - wives # zero
-  - wife # one
-  - wives # two
-#  - wives # other
-  - Описание поля "Жена" # desc
-wife_collision:
-  - wives # zero
-  - wife # one
-  - wives # two
-  - wives # other
-#  - Описание поля "Жена" # desc
-husband:
-  - husbands # zero
-  - husband # one
-  - husbands # two
-  - husbands # other
-  - Описание поля "Муж" # desc
-send:
-  - Send #value
-  - Отправить что-то куда-то #desc
+ok: OK
+
 save:
   value: Save
-  desc: Сохранение чего-либо где-либо
-child:
-  zero: children
-  one: child
-  two: children
-  other: children
-  desc: Используется для описания количества детей
-cow:
-  zero: cows
-  one: cow
-  other: cows
-  desc: Используется для описания количества коров
-new_message: New message
+  desc: Saving something
+
+book:
+  zero: books
+  one: book
+  two: books
+  other: books
+  desc: Uses for description of books count
+
+namespacedZone:
+  title: Title of Namespaced zone
+  description: Description of Namespaced zone
+  checkout:
+    title: Checkoout for additional page
+  innerNamespacedZone:
+    title: Deeper title of Inner namespaced zone
+    description: Deeper description of Inner namespaced zone
+    book:
+      zero: books
+      one: book
+      two: books
+      few: books
+      many: books
+      other: books
+      desc: Uses for description of books count
+
+cart:
+  title: Cart
+  description: Please, fill the cart to do checkout
+  checkout:
+    title: Checkout
+    description: You should checkout

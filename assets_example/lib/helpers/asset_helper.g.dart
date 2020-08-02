@@ -7,6 +7,7 @@ part of 'asset_helper.dart';
 // **************************************************************************
 
 enum Asset {
+  _stub,
   second,
   first,
   secondCopy,
@@ -42,7 +43,7 @@ mixin _$AssetHelper {
     for (Asset assetEnumField in Asset.values) {
       loaders.add(loadAsset(assetEnumField));
     }
-    await Future.wait(loaders);
+    await Future.wait<void>(loaders);
     isPreloaded = true;
     return isPreloaded;
   }

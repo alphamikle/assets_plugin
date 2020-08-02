@@ -6,147 +6,281 @@ part of 'localization_delegate.dart';
 // Generator of localization_delegate
 // **************************************************************************
 
-abstract class LocalizationMessages {
-  final String ok = '';
-
-  /// Описание поля "Жена"
-  String wife(int howMany) => '';
-
-  String wife_collision(int howMany) => '';
-
-  /// Описание поля "Муж"
-  String husband(int howMany) => '';
-
-  /// Отправить что-то куда-то
-  final String send = '';
-
-  /// Сохранение чего-либо где-либо
-  final String save = '';
-
-  /// Используется для описания количества детей
-  String child(int howMany) => '';
-
-  /// Используется для описания количества коров
-  String cow(int howMany) => '';
-
-  final String new_message = '';
+class _NamespacedZoneCheckout {
+  final String title = '';
 }
 
-class _Ru extends LocalizationMessages {
+class _RuNamespacedZoneCheckout implements _NamespacedZoneCheckout {
+  /// Description: ""
+  /// Example: "Оформление заказа для доп. страницы"
   @override
-  final String ok = Intl.message('OK', name: 'ok');
+  final String title = Intl.message('Оформление заказа для доп. страницы',
+      name: 'title', desc: '');
+}
 
+class _NamespacedZoneInnerNamespacedZone {
+  final String title = '';
+  final String description = '';
+  String book(int howMany) => '';
+}
+
+class _RuNamespacedZoneInnerNamespacedZone
+    implements _NamespacedZoneInnerNamespacedZone {
+  /// Description: ""
+  /// Example: "Более глубокий заголовок"
   @override
-  String wife(int howMany) => Intl.plural(howMany,
-      name: 'wife',
-      zero: '$howMany Жён',
-      one: '$howMany Жена',
-      other: '$howMany Жены',
-      desc: 'Описание поля "Жена"');
+  final String title =
+      Intl.message('Более глубокий заголовок', name: 'title', desc: '');
 
+  /// Description: ""
+  /// Example: "Более глубокое описание"
   @override
-  String wife_collision(int howMany) => Intl.plural(howMany,
-      name: 'wife_collision',
-      zero: '$howMany Жён',
-      one: '$howMany Жена',
-      other: '$howMany Жёны',
-      two: '$howMany Жены');
+  final String description =
+      Intl.message('Более глубокое описание', name: 'description', desc: '');
 
+  /// Description: "Используется для описания количества книг в Inner namespace"
+  /// Example: "zero: книг, one: книга, two: книги, few: книги, many: книг, other: книг"
   @override
-  String husband(int howMany) => Intl.plural(howMany,
-      name: 'husband',
-      zero: '$howMany мужей',
-      one: '$howMany муж',
-      other: '$howMany мужа',
-      two: '$howMany мужа',
-      desc: 'Описание поля "Муж"');
+  String book(int howMany) => Intl.plural(
+        howMany,
+        name: 'book',
+        zero: 'книг',
+        one: 'книга',
+        two: 'книги',
+        few: 'книги',
+        many: 'книг',
+        other: 'книг',
+        desc: 'Используется для описания количества книг в Inner namespace',
+      );
+}
 
+class _NamespacedZone {
+  final String title = '';
+  final String description = '';
+  final _NamespacedZoneCheckout checkout = _NamespacedZoneCheckout();
+  final _NamespacedZoneInnerNamespacedZone innerNamespacedZone =
+      _NamespacedZoneInnerNamespacedZone();
+}
+
+class _RuNamespacedZone implements _NamespacedZone {
+  /// Description: ""
+  /// Example: "Заголовок"
   @override
-  final String send =
-      Intl.message('Отправить', name: 'send', desc: 'Отправить что-то куда-то');
+  final String title = Intl.message('Заголовок', name: 'title', desc: '');
 
+  /// Description: ""
+  /// Example: "Описание"
+  @override
+  final String description =
+      Intl.message('Описание', name: 'description', desc: '');
+  @override
+  final _NamespacedZoneCheckout checkout = _RuNamespacedZoneCheckout();
+  @override
+  final _NamespacedZoneInnerNamespacedZone innerNamespacedZone =
+      _RuNamespacedZoneInnerNamespacedZone();
+}
+
+class _CartCheckout {
+  final String title = '';
+  final String description = '';
+}
+
+class _RuCartCheckout implements _CartCheckout {
+  /// Description: ""
+  /// Example: "Оформление заказа"
+  @override
+  final String title =
+      Intl.message('Оформление заказа', name: 'title', desc: '');
+
+  /// Description: ""
+  /// Example: "Вам необходимо оформить заказ"
+  @override
+  final String description = Intl.message('Вам необходимо оформить заказ',
+      name: 'description', desc: '');
+}
+
+class _Cart {
+  final String title = '';
+  final String description = '';
+  final _CartCheckout checkout = _CartCheckout();
+}
+
+class _RuCart implements _Cart {
+  /// Description: ""
+  /// Example: "Корзина"
+  @override
+  final String title = Intl.message('Корзина', name: 'title', desc: '');
+
+  /// Description: ""
+  /// Example: "Наполните корзину для оформления заказа"
+  @override
+  final String description = Intl.message(
+      'Наполните корзину для оформления заказа',
+      name: 'description',
+      desc: '');
+  @override
+  final _CartCheckout checkout = _RuCartCheckout();
+}
+
+abstract class LocalizationMessages {
+  final String ok = '';
+  final String save = '';
+  String book(int howMany) => '';
+  final _NamespacedZone namespacedZone = _RuNamespacedZone();
+  final _Cart cart = _RuCart();
+}
+
+class _Ru implements LocalizationMessages {
+  /// Description: ""
+  /// Example: "OK"
+  @override
+  final String ok = Intl.message('OK', name: 'ok', desc: '');
+
+  /// Description: "Сохранение чего-либо где-либо"
+  /// Example: "Сохранить"
   @override
   final String save = Intl.message('Сохранить',
       name: 'save', desc: 'Сохранение чего-либо где-либо');
 
+  /// Description: "Используется для описания количества книг"
+  /// Example: "zero: книг, one: книга, two: книги, few: книги, many: книг, other: книг"
   @override
-  String child(int howMany) => Intl.plural(howMany,
-      name: 'child',
-      zero: '$howMany Детей',
-      one: '$howMany Ребенок',
-      other: '$howMany Дети',
-      two: '$howMany Ребенка',
-      desc: 'Используется для описания количества детей');
-
+  String book(int howMany) => Intl.plural(
+        howMany,
+        name: 'book',
+        zero: 'книг',
+        one: 'книга',
+        two: 'книги',
+        few: 'книги',
+        many: 'книг',
+        other: 'книг',
+        desc: 'Используется для описания количества книг',
+      );
   @override
-  String cow(int howMany) => Intl.plural(howMany,
-      name: 'cow',
-      zero: '$howMany коров',
-      one: '$howMany корова',
-      other: '$howMany коровы',
-      desc: 'Используется для описания количества коров');
-
+  final _NamespacedZone namespacedZone = _RuNamespacedZone();
   @override
-  final String new_message =
-      Intl.message('Новое сообщение', name: 'new_message');
+  final _Cart cart = _RuCart();
 }
 
-class _En extends LocalizationMessages {
+class _EnNamespacedZoneCheckout implements _NamespacedZoneCheckout {
+  /// Description: ""
+  /// Example: "Checkoout for additional page"
   @override
-  final String ok = Intl.message('OK', name: 'ok');
+  final String title =
+      Intl.message('Checkoout for additional page', name: 'title', desc: '');
+}
 
+class _EnNamespacedZoneInnerNamespacedZone
+    implements _NamespacedZoneInnerNamespacedZone {
+  /// Description: ""
+  /// Example: "Deeper title of Inner namespaced zone"
   @override
-  String wife(int howMany) => Intl.plural(howMany,
-      name: 'wife',
-      zero: '$howMany wives',
-      one: '$howMany wife',
-      other: '$howMany wives',
-      desc: 'Описание поля "Жена"');
+  final String title = Intl.message('Deeper title of Inner namespaced zone',
+      name: 'title', desc: '');
 
+  /// Description: ""
+  /// Example: "Deeper description of Inner namespaced zone"
   @override
-  String wife_collision(int howMany) => Intl.plural(howMany,
-      name: 'wife_collision',
-      zero: '$howMany wives',
-      one: '$howMany wife',
-      other: '$howMany wives',
-      two: '$howMany wives');
+  final String description = Intl.message(
+      'Deeper description of Inner namespaced zone',
+      name: 'description',
+      desc: '');
 
+  /// Description: "Uses for description of books count"
+  /// Example: "zero: books, one: book, two: books, few: books, many: books, other: books"
   @override
-  String husband(int howMany) => Intl.plural(howMany,
-      name: 'husband',
-      zero: '$howMany husbands',
-      one: '$howMany husband',
-      other: '$howMany husbands',
-      two: '$howMany husbands',
-      desc: 'Описание поля "Муж"');
+  String book(int howMany) => Intl.plural(
+        howMany,
+        name: 'book',
+        zero: 'books',
+        one: 'book',
+        two: 'books',
+        few: 'books',
+        many: 'books',
+        other: 'books',
+        desc: 'Uses for description of books count',
+      );
+}
 
+class _EnNamespacedZone implements _NamespacedZone {
+  /// Description: ""
+  /// Example: "Title of Namespaced zone"
   @override
-  final String send =
-      Intl.message('Send', name: 'send', desc: 'Отправить что-то куда-то');
+  final String title =
+      Intl.message('Title of Namespaced zone', name: 'title', desc: '');
 
+  /// Description: ""
+  /// Example: "Description of Namespaced zone"
+  @override
+  final String description = Intl.message('Description of Namespaced zone',
+      name: 'description', desc: '');
+  @override
+  final _NamespacedZoneCheckout checkout = _EnNamespacedZoneCheckout();
+  @override
+  final _NamespacedZoneInnerNamespacedZone innerNamespacedZone =
+      _EnNamespacedZoneInnerNamespacedZone();
+}
+
+class _EnCartCheckout implements _CartCheckout {
+  /// Description: ""
+  /// Example: "Checkout"
+  @override
+  final String title = Intl.message('Checkout', name: 'title', desc: '');
+
+  /// Description: ""
+  /// Example: "You should checkout"
+  @override
+  final String description =
+      Intl.message('You should checkout', name: 'description', desc: '');
+}
+
+class _EnCart implements _Cart {
+  /// Description: ""
+  /// Example: "Cart"
+  @override
+  final String title = Intl.message('Cart', name: 'title', desc: '');
+
+  /// Description: ""
+  /// Example: "Please, fill the cart to do checkout"
+  @override
+  final String description = Intl.message(
+      'Please, fill the cart to do checkout',
+      name: 'description',
+      desc: '');
+  @override
+  final _CartCheckout checkout = _EnCartCheckout();
+}
+
+class _En implements LocalizationMessages {
+  /// Description: ""
+  /// Example: "OK"
+  @override
+  final String ok = Intl.message('OK', name: 'ok', desc: '');
+
+  /// Description: "Saving something"
+  /// Example: "Save"
   @override
   final String save =
-      Intl.message('Save', name: 'save', desc: 'Сохранение чего-либо где-либо');
+      Intl.message('Save', name: 'save', desc: 'Saving something');
 
+  /// Description: "Uses for description of books count"
+  /// Example: "zero: books, one: book, two: books, few: books, many: books, other: books"
   @override
-  String child(int howMany) => Intl.plural(howMany,
-      name: 'child',
-      zero: '$howMany children',
-      one: '$howMany child',
-      other: '$howMany children',
-      two: '$howMany children',
-      desc: 'Используется для описания количества детей');
-
+  String book(int howMany) => Intl.plural(
+        howMany,
+        name: 'book',
+        zero: 'books',
+        one: 'book',
+        two: 'books',
+        few: 'books',
+        many: 'books',
+        other: 'books',
+        desc: 'Uses for description of books count',
+      );
   @override
-  String cow(int howMany) => Intl.plural(howMany,
-      name: 'cow',
-      zero: '$howMany cows',
-      one: '$howMany cow',
-      other: '$howMany cows',
-      desc: 'Используется для описания количества коров');
-
+  final _NamespacedZone namespacedZone = _EnNamespacedZone();
   @override
-  final String new_message = Intl.message('New message', name: 'new_message');
+  final _Cart cart = _EnCart();
 }
 
 class _$LocalizationDelegate

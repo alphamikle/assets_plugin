@@ -1,37 +1,36 @@
-ok: OK # value
-wife:
-  - Жён # zero
-  - Жена # one
-  - Жены # two
-#  - Жёны # other
-  - Описание поля "Жена" # desc
-wife_collision:
-  - Жён # zero
-  - Жена # one
-  - Жены # two
-  - Жёны # other
-#  - Описание поля "Жена" # desc
-husband:
-  - мужей # zero
-  - муж # one
-  - мужа
-  - мужа # other
-  - Описание поля "Муж" # desc
-send:
-  - Отправить # value
-  - Отправить что-то куда-то # desc
+ok: OK
+
 save:
   value: Сохранить
   desc: Сохранение чего-либо где-либо
-child:
-  zero: Детей
-  one: Ребенок
-  two: Ребенка
-  other: Дети
-  desc: Используется для описания количества детей
-cow:
-  zero: коров
-  one: корова
-  other: коровы
-  desc: Используется для описания количества коров
-new_message: Новое сообщение
+
+book:
+  zero: книг
+  one: книга
+  two: книги
+  other: книг
+  desc: Используется для описания количества книг
+
+namespacedZone:
+  title: Заголовок
+  description: Описание
+  checkout:
+    title: Оформление заказа для доп. страницы
+  innerNamespacedZone:
+    title: Более глубокий заголовок
+    description: Более глубокое описание
+    book:
+      zero: книг
+      one: книга
+      two: книги
+      few: книг
+      many: книг
+      other: книг
+      desc: Используется для описания количества книг в Inner namespace
+
+cart:
+  title: Корзина
+  description: Наполните корзину для оформления заказа
+  checkout:
+    title: Оформление заказа
+    description: Вам необходимо оформить заказ

@@ -11,12 +11,6 @@ class IntlTemplate {
 
   String _languageClasses = '';
 
-  String get _abstractClassStart => '''
-  abstract class $ABSTRACT_CLASS_NAME {
-  ''';
-
-  String get _abstractClassEnd => _end;
-
   String get _templatesMapStart => '''
   final Map<String, $ABSTRACT_CLASS_NAME> _languageMap = {
   ''';
@@ -51,22 +45,13 @@ class IntlTemplate {
   ''';
 
   String get template {
-    return _abstractClass + _languageClasses + _start + _templatesMapStart + _mapTemplate + _templatesMapEnd + _end + _messagesUtil;
+    return _languageClasses + _start + _templatesMapStart + _mapTemplate + _templatesMapEnd + _end + _messagesUtil;
   }
 
   void addLanguage(String code, LanguageTemplate languageTemplate) {
-    _abstractFields.addAll(languageTemplate.methods);
-    _languageClasses += languageTemplate.template;
+    _languageClasses += languageTemplate.toString();
     _mapTemplate += '''
     '$code': _${languageTemplate.title}(),
     ''';
-  }
-
-  String get _abstractClass {
-    String abstractClassBody = '';
-    for (String method in _abstractFields.values) {
-      abstractClassBody += method;
-    }
-    return _abstractClassStart + abstractClassBody + _abstractClassEnd;
   }
 }

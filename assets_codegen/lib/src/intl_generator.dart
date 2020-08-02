@@ -6,6 +6,7 @@ import 'package:assets_annotations/assets_annotations.dart';
 import 'package:assets_codegen/src/mixins/directory_watcher.dart';
 import 'package:assets_codegen/src/templates/intl_template.dart';
 import 'package:assets_codegen/src/templates/language_template.dart';
+import 'package:assets_codegen/src/templates/parsing_methods.dart';
 import 'package:assets_codegen/src/utils/utils.dart';
 import 'package:build/build.dart';
 import 'package:build/src/builder/build_step.dart';
@@ -49,30 +50,26 @@ class IntlGenerator extends GeneratorForAnnotation<IntlHelp> with DirectoryWatch
 
   void _readIntlFiles() {
     _languages.clear();
+    bool isFirst = true;
     for (String intlFile in _intlFiles) {
       final File file = File(p.join(path, intlFile));
       YamlMap fileContent = loadYaml(file.readAsStringSync());
       List<MapEntry<dynamic, dynamic>> entries = fileContent.entries.toList();
       final String languageCode = _getLanguageCode(intlFile);
-      final LanguageTemplate languageTemplate = LanguageTemplate(capitalize(languageCode));
+      final LanguageTemplate languageTemplate = LanguageTemplate(capitalize(languageCode), isFirst);
       for (MapEntry<dynamic, dynamic> entry in entries) {
         _writeMessage(entry, languageTemplate);
       }
       _languages[languageCode] = languageTemplate;
       _intlTemplate.addLanguage(languageCode, languageTemplate);
+      isFirst = false;
     }
   }
 
   void _writeMessage(MapEntry<dynamic, dynamic> entry, LanguageTemplate template) {
-    final String key = entry.key.toString();
+    final String code = entry.key as String;
     final dynamic value = entry.value;
-    if (value is String || value is num) {
-      template.addSimpleMessage(key, value.toString());
-    } else if (value is YamlMap) {
-      template.addMapMessage(key, value);
-    } else {
-      throw Exception('Invalid format of message. Value: $value, key: $key, type: ${value.runtimeType}');
-    }
+    addMessageToLocalizationContentTemplate(value, code, template);
   }
 
   @override
