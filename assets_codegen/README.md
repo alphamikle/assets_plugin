@@ -52,66 +52,45 @@ or contain language code delimited by dot with prefix:
 .../ru.intl.yaml
 .../en.intl.yaml
 
-For example this two files will produce Delegate:
-ru:
+For example this file will produce Delegate:
 ```yaml
-ok: OK # value
-save:
-  value: Сохранить
-  desc: Сохранение чего-либо где-либо
-child:
-  zero: Детей
-  one: Ребенок
-  two: Ребенка
-  few: Детей
-  many: Детей
-  other: Детей
-  desc: Используется для описания количества детей
-cow:
-  zero: коров
-  one: корова
-  other: коровы
-  desc: Используется для описания количества коров
-```
-en:
-```yaml
-ok: OK # value
+ok: OK
+
 save:
   value: Save
-  desc: Сохранение чего-либо где-либо
-child:
-  zero: children
-  one: child
-  two: children
-  other: children
-  desc: Используется для описания количества детей
-cow:
-  zero: cows
-  one: cow
-  other: cows
-  desc: Используется для описания количества коров
+  desc: Saving something
+
+book:
+  zero: books
+  one: book
+  two: books
+  other: books
+  desc: Uses for description of books count
+
+namespacedZone:
+  title: Title of Namespaced zone
+  description: Description of Namespaced zone
+  checkout:
+    title: Checkoout for additional page
+  innerNamespacedZone:
+    title: Deeper title of Inner namespaced zone
+    description: Deeper description of Inner namespaced zone
+    book:
+      zero: books
+      one: book
+      two: books
+      few: books
+      many: books
+      other: books
+      desc: Uses for description of books count
+
+cart:
+  title: Cart
+  description: Please, fill the cart to do checkout
+  checkout:
+    title: Checkout
+    description: You should checkout
 ```
-Yaml file should contain key-value messages for specific locale. There are formats, which supports by plugin at now:
-simplest:
-```yaml
-key: yourMessage
-```
-with desc:
-```yaml
-key:
-  value: yourMessage
-  desc: yourMessageDescription
-```
-with pluralization supports:
-```yaml
-key:
-  zero: yourMessage for 0
-  one: yourMessage for 1
-  two: yourMessage for 2 <- It's an optional field for that type
-  other: yourMessage for other
-  desc: yourMessageDescription <- It's an optional field for that type
-```
-Plugin can understand difference between your description and other fields by it's content and choose correct type
 
 After you create your messages yaml files you should place its at asset folder (or other folder, which is marked as "asset" in your pubspec.yaml. Each language yaml must contain a "intl" substring or other,
 if you want by pass prefix param to @IntlHelp annotation:
@@ -165,34 +144,38 @@ class MyApp extends StatelessWidget {
 ...
 ```dart
 @override
-Widget build(BuildContext context) {
-return Scaffold(
-  appBar: AppBar(
-    title: Text('${Messages.of(context).cow(1)} app'),
-  ),
-  body: Center(
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Text('You have ${Messages.of(context).cow(_counter)}'),
-      ],
-    ),
-  ),
-  floatingActionButton: FloatingActionButton(
-    onPressed: _incrementCounter,
-    tooltip: 'Increment',
-    child: Icon(Icons.add),
-  ),
-);
-}
+  Widget build(BuildContext context) {
+    final LocalizationMessages _loc = Messages.of(context);
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('${Messages.of(context).book(1)} app'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            _buildText('You have $_counter ${_loc.book(_counter)}'),
+            _buildText('Namespaced title: ${_loc.namespacedZone.title}'),
+            _buildText('Checkout from one namespace: ${_loc.namespacedZone.checkout.title}'),
+            _buildText('Checkout from other namespace: ${_loc.cart.checkout.title}'),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementCounter,
+        tooltip: 'Increment',
+        child: Icon(Icons.add),
+      ),
+    );
+  }
 ```
-you can ask what is a Messages, well, it's is a generated helper for extract you messages from context, which can be imported from generated file:
+You can ask what is a Messages?, well, it's is a generated helper for extract you messages from context, which can be imported from generated file:
 ```dart
 class Messages {
   static LocalizationMessages of(BuildContext context) =>
       Localizations.of(context, LocalizationMessages);
 }
 ```
-![zero cows](https://github.com/alphamikle/assets_plugin/blob/master/assets_example/assets/img/one%20cow.png)
-![one cow](https://github.com/alphamikle/assets_plugin/blob/master/assets_example/assets/img/two%20cows.png)
-![two cows](https://github.com/alphamikle/assets_plugin/blob/master/assets_example/assets/img/zero%20cows.png)
+![EN Translation](https://github.com/alphamikle/assets_plugin/blob/master/assets_example/assets/img/en.png)
+![RU Translation](https://github.com/alphamikle/assets_plugin/blob/master/assets_example/assets/img/ru.png)
