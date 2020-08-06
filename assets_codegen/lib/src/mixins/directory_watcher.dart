@@ -19,6 +19,7 @@ mixin DirectoryWatcher<T> on GeneratorForAnnotation<T> {
   YamlList _assetsFolders;
 
   String getOnlyAssetFileName(String assetFileNameWithPath) {
+    assetFileNameWithPath = assetFileNameWithPath.replaceAll(RegExp(r'\\'), '/');
     assetFileNameWithPath = assetFileNameWithPath.replaceAll(RegExp(r'^.*\/'), '');
     return assetFileNameWithPath;
   }

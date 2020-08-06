@@ -1,3 +1,4 @@
+## 2.1.1 - Fix windows slashes
 ## 2.1.0 - Add namespaces handling
 ## 2.0.1 - Fix handling of numeric typed messages
 ## 2.0.0 - Remove list format of plurals and add few with more plural forms

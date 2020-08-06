@@ -90,7 +90,6 @@ String getNamespaceInterface(String code, String lang, String parent) {
   final parentName = capitalize(parent);
   final fieldName = capitalize(code);
   final clearFieldName = (parentName + fieldName).replaceFirst(lang, '');
-  print('Parent name: $parentName, fieldName: $fieldName, lang: $lang');
   return '''
     final _$clearFieldName $code = _$parentName$fieldName();
   ''';
