@@ -18,6 +18,8 @@ mixin DirectoryWatcher<T> on GeneratorForAnnotation<T> {
   String path;
   YamlList _assetsFolders;
 
+  final RegExp _diskWord = RegExp(r'^[a-zA-Z]+:');
+
   String getOnlyAssetFileName(String assetFileNameWithPath) {
     assetFileNameWithPath = assetFileNameWithPath.replaceAll(RegExp(r'\\'), '/');
     assetFileNameWithPath = assetFileNameWithPath.replaceAll(RegExp(r'^.*\/'), '');
@@ -53,7 +55,12 @@ mixin DirectoryWatcher<T> on GeneratorForAnnotation<T> {
         _assetsFoldersWatchers[dirPath] = assetDirectory.watch(recursive: true);
       }
       final List<FileSystemEntity> folderFiles = assetDirectory.listSync(recursive: true).where((FileSystemEntity fileEntity) => FileSystemEntity.isFileSync(fileEntity.path)).toList();
-      tempAssetsFiles.addAll(folderFiles.map((FileSystemEntity fileEntity) => fileEntity.path.replaceFirst(RegExp('$path/'), '')).where((String fileName) => !fileName.contains('/.')));
+      final String unixPath = path.replaceFirst(_diskWord, '').replaceAll(r'\', '/');
+      tempAssetsFiles.addAll(folderFiles.map((FileSystemEntity fileEntity) {
+        final String unixFilePath = fileEntity.path.replaceFirst(_diskWord, '').replaceAll(r'\', '/');
+        final result = unixFilePath.replaceFirst(RegExp('$unixPath/'), '');
+        return result;
+      }).where((String fileName) => !fileName.contains('/.')));
     }
     return tempAssetsFiles;
   }
