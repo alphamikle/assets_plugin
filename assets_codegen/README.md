@@ -38,7 +38,11 @@ class AssetHelper with _$AssetHelper {}
 ```
 Plugin will search assets section in your pubspec.ya?ml file and watch directories, which is described there and deeper (recursive), after you run
 ```bash
-flutter pub run build_runner build|watch [--delete-conflicting-outputs]
+flutter pub run build_runner watch [--delete-conflicting-outputs]
+```
+In additional, you can run build runner with this option to run assets_codegen or intl_codegen without their customs asset's file watchers:
+```bash
+flutter pub run build_runner build [--delete-conflicting-outputs] --define="assets_codegen=once=true"
 ```
 plugin will generate mixin near your annotated file-class.
 

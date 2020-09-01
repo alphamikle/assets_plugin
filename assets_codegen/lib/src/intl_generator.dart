@@ -14,7 +14,7 @@ import 'package:path/path.dart' as p;
 import 'package:source_gen/source_gen.dart';
 import 'package:yaml/yaml.dart';
 
-class IntlGenerator extends GeneratorForAnnotation<IntlHelp> with DirectoryWatcher<IntlHelp> {
+class IntlGenerator extends GeneratorForAnnotation<IntlHelp> with WatcherDisabler<IntlHelp>, DirectoryWatcher<IntlHelp> {
   final Set<String> _intlFiles = {};
   final Set<String> _assetsFiles = {};
   IntlTemplate _intlTemplate;
@@ -22,8 +22,13 @@ class IntlGenerator extends GeneratorForAnnotation<IntlHelp> with DirectoryWatch
 
   String _intlFilesPrefix;
 
-  IntlGenerator() {
+  IntlGenerator(BuilderOptions options) {
     scanAssets();
+    final Map<String, dynamic> config = options.config;
+    withWatchers = config['once'] != true;
+    if (!withWatchers) {
+      print('IntlGenerator will start without files watcher');
+    }
   }
 
   bool isIntlFile(String fileName) => fileName.contains(RegExp('$_intlFilesPrefix\.ya?ml\$'));

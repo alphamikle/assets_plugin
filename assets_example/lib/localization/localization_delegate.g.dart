@@ -3,7 +3,7 @@
 part of 'localization_delegate.dart';
 
 // **************************************************************************
-// Generator of localization_delegate
+// IntlGenerator
 // **************************************************************************
 
 class _NamespacedZoneCheckout {

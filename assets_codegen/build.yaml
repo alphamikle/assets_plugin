@@ -3,6 +3,8 @@ targets:
     builders:
       assets_codegen:
         enabled: true
+      intl_codegen:
+        enabled: true
 
 builders:
   assets_codegen:
@@ -17,6 +19,7 @@ builders:
     build_to: cache
     defaults:
       options:
+        once: false
         default_preload:
           - txt
           - json
@@ -33,5 +36,8 @@ builders:
         - .g.dart
     auto_apply: dependents
     build_to: cache
+    defaults:
+      options:
+        once: false
     applies_builders:
       - source_gen|combining_builder

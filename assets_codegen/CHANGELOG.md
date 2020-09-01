@@ -1,3 +1,4 @@
+## 2.2.0 - Add functionality to run build_runner without custom file watchers
 ## 2.1.2 - Fix windows slashes in assets paths
 ## 2.1.1 - Fix windows slashes
 ## 2.1.0 - Add namespaces handling

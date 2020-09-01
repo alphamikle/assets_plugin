@@ -10,7 +10,7 @@ const ASSET_ENUM = 'Asset';
 const ASSET_ENUM_MAP = '_assetEnumMap';
 
 /// Generator for user classes, annotated with @AstHelp
-class AssetsGenerator extends GeneratorForAnnotation<AstHelp> with DirectoryWatcher<AstHelp> {
+class AssetsGenerator extends GeneratorForAnnotation<AstHelp> with WatcherDisabler<AstHelp>, DirectoryWatcher<AstHelp> {
   final Set<String> _assetsFiles = {};
   final Set<String> _assetsFields = {};
 
@@ -18,8 +18,11 @@ class AssetsGenerator extends GeneratorForAnnotation<AstHelp> with DirectoryWatc
 
   AssetsGenerator(BuilderOptions options) {
     scanAssets();
-
     final Map<String, dynamic> config = options.config;
+    withWatchers = config['once'] != true;
+    if (!withWatchers) {
+      print('AssetsGenerator will start without files watcher');
+    }
     if (config['default_preload'] == null) {
       throw Exception('Not found "default_preload" field in build.yaml file');
     }
@@ -145,7 +148,7 @@ class AssetsGenerator extends GeneratorForAnnotation<AstHelp> with DirectoryWatc
   }
 
   @override
-  FutureOr<String> generateForAnnotatedElement(el.Element element, ConstantReader annotation, BuildStep step) {
+  FutureOr<String> generateForAnnotatedElement(el.Element element, ConstantReader annotation, BuildStep step) async {
     String assetsHelperMixin = _startMixin(element.name);
     final Set<String> tempAssetsFiles = getAssetDirectoryFiles();
     String assetEnum = _startEnum();

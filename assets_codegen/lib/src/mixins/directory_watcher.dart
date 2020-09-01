@@ -8,7 +8,7 @@ import 'package:path/path.dart' as p;
 import 'package:source_gen/source_gen.dart';
 import 'package:yaml/yaml.dart';
 
-mixin DirectoryWatcher<T> on GeneratorForAnnotation<T> {
+mixin DirectoryWatcher<T> on GeneratorForAnnotation<T>, WatcherDisabler<T> {
   final Map<String, Stream<FileSystemEvent>> _assetsFoldersWatchers = {};
 
   BuildStep prevStep;
@@ -51,7 +51,7 @@ mixin DirectoryWatcher<T> on GeneratorForAnnotation<T> {
     for (String assetFolder in _assetsFolders) {
       final String dirPath = p.join(path, assetFolder);
       final Directory assetDirectory = Directory(dirPath);
-      if (!_assetsFoldersWatchers.containsKey(dirPath)) {
+      if (!_assetsFoldersWatchers.containsKey(dirPath) && withWatchers) {
         _assetsFoldersWatchers[dirPath] = assetDirectory.watch(recursive: true);
       }
       final List<FileSystemEntity> folderFiles = assetDirectory.listSync(recursive: true).where((FileSystemEntity fileEntity) => FileSystemEntity.isFileSync(fileEntity.path)).toList();
@@ -88,11 +88,15 @@ mixin DirectoryWatcher<T> on GeneratorForAnnotation<T> {
   }
 
   void tryToAssignWatchers(el.Element element, ConstantReader annotation, BuildStep step) {
-    if (!isWatchersAssigned) {
+    if (!isWatchersAssigned && withWatchers) {
       _assignWatchers();
       prevElement = element;
       prevAnnotation = annotation;
       prevStep = step;
     }
   }
+}
+
+mixin WatcherDisabler<T> on GeneratorForAnnotation<T> {
+  bool withWatchers = true;
 }
