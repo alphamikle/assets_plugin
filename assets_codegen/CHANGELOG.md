@@ -1,3 +1,4 @@
+## 2.3.0 - Delete test folder which bricks on a stable channel and up start version of dart
 ## 2.2.0 - Add functionality to run build_runner without custom file watchers
 ## 2.1.2 - Fix windows slashes in assets paths
 ## 2.1.1 - Fix windows slashes
